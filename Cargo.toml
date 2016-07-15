@@ -4,5 +4,5 @@ version = "0.1.0"
 authors = ["Willam Woodhead <william.woodhead@lux01.co.uk>"]
 
 [dependencies]
-regex = "0.1"
 libc = "0.2"
+discord = "0.6"
