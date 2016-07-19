@@ -2,7 +2,13 @@
 name = "hello_pi"
 version = "0.1.0"
 authors = ["Willam Woodhead <william.woodhead@lux01.co.uk>"]
+description = "A personal Discord chat bot"
+repository = "https://github.com/lux01/hello_pi"
+readme = "README.md"
+license = "MIT"
 
 [dependencies]
 libc = "0.2"
-discord = "0.6"
+hyper = "0.9"
+websocket = "0.17"
+url = "1.1"

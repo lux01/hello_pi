@@ -1,9 +1,12 @@
 extern crate libc;
-extern crate discord;
+extern crate url;
+extern crate hyper;
+extern crate websocket;
 
 use std::net::{IpAddr};
 
 mod ip;
+pub mod discord;
 
 fn main() {
     println!("Hello from Rust!");
@@ -18,5 +21,11 @@ fn main() {
     for ifa in interfaces {
         println!("\t{}: {}", ifa.name, ifa.addr);
     }
-    
+
+    let client = hyper::Client::new();
+    let conn = discord::Connection::from_token("TEST".to_owned(),
+                                               discord::TokenType::Bot,
+                                               &client);
+
+    println!("{:?}", conn);
 }
