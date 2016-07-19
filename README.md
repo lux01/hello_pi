@@ -100,9 +100,29 @@ The first step is to download the OpenSSL source code
 and checkout your preferred version
 
 ```
-$ git clone https://github.com/openssl/openssl
-$ cd openssl
-$ git checkout OpenSSL_1_0_2
+$ wget ftp://ftp.openssl.org/source/openssl-1.0.2h.tar.gz
+$ tar -xzf openssl-1.0.2h.tar.gz
+$ cd openssl-1.0.2h/
+```
+
+Next we need to prepare our environment to build targetting
+ARM:
+
+```
+$ export CROSS=arm-linux-gnueabihf
+$ export AR=$CROSS-ar
+$ export AS=$CROSS-as
+$ export CC=$CROSS-gcc
+$ export CXX=$CROSS-g++
+$ export LD=$CROSS-ld
+$ ./Configure --prefix=/usr/arm-linux-gnueabihf linux-armv4
+```
+
+Finally we can build and install the library
+
+```
+$ make
+$ sudo make install
 ```
 
 [rustup]: https://www.rustup.rs "Rustup"
