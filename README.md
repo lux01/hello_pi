@@ -96,8 +96,9 @@ OpenSSL generates some header files at compile time that
 do not translate across platforms so we need to recompile
 OpenSSL if we want to cross compile to the Rasperry Pi.
 
-The first step is to download the OpenSSL source code
-and checkout your preferred version
+I have only been able to get OpenSSL 1.0.2h to work with
+the Rust `openssl` crate so we will compile that verison
+directly.
 
 ```
 $ wget ftp://ftp.openssl.org/source/openssl-1.0.2h.tar.gz
