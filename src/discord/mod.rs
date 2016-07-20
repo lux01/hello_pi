@@ -85,7 +85,7 @@ impl Connection {
         };
         
         let res = client.get(api_url!("/gateway"))
-            .header(http::HttpHeader::Authorization(auth))
+            .header(http::HttpHeader::Authorization(auth.clone()))
             .header(http::HttpHeader::UserAgent(format!("LuxBot (http://github.com/lux01/hello_pi, {})", env!("CARGO_PKG_VERSION")).to_owned()))
             .send()
             .unwrap();

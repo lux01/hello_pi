@@ -2,6 +2,7 @@ use super::*;
 use super::super::AuthorizationToken;
 
 use std::fmt;
+use std::borrow::Cow;
 
 use hyper::header;
 use hyper::header::Scheme;
@@ -16,7 +17,7 @@ impl<'a> HttpClient<'a> for Client {
     }
 }
 
-impl<'a> Scheme for &'a AuthorizationToken {
+impl Scheme for AuthorizationToken {
     fn scheme() -> Option<&'static str> {
         None
     }
@@ -25,6 +26,7 @@ impl<'a> Scheme for &'a AuthorizationToken {
         write!(f, "{} {}", self.token_type, self.token)
     }
 }
+
 
 impl<'a> HttpRequest<'a> for RequestBuilder<'a> {
     type Response = Response;

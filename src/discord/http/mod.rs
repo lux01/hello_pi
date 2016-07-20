@@ -13,8 +13,8 @@ pub trait HttpClient<'a> {
     fn get(&'a self, url: Url) -> Self::Request;
 }
 
-pub enum HttpHeader<'a> {
-    Authorization(&'a AuthorizationToken),
+pub enum HttpHeader {
+    Authorization(AuthorizationToken),
     UserAgent(String),
 }
 
