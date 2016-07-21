@@ -2,15 +2,17 @@ use super::*;
 use super::super::AuthorizationToken;
 
 use std::fmt;
-use std::borrow::Cow;
 
 use hyper::header;
 use hyper::header::Scheme;
 use hyper::client::{Client, RequestBuilder, Response, Body};
 use hyper::Error;
 
+impl HttpError for Error { }
+
 impl<'a> HttpClient<'a> for Client {
     type Request = RequestBuilder<'a>;
+    type Error = Error;
 
     fn get(&'a self, url: Url) -> Self::Request {
         self.get(url)
@@ -28,11 +30,10 @@ impl Scheme for AuthorizationToken {
 }
 
 
-impl<'a> HttpRequest<'a> for RequestBuilder<'a> {
+impl<'a> HttpRequest<'a, Error> for RequestBuilder<'a> {
     type Response = Response;
-    type Error = Error;
 
-    fn send(self) -> Result<Self::Response, Self::Error> {
+    fn send(self) -> Result<Self::Response, Error> {
         self.send()
     }
 
@@ -49,8 +50,6 @@ impl<'a> HttpRequest<'a> for RequestBuilder<'a> {
 }
 
 impl HttpResponse for Response {
-    type Error = Error;
-
     fn status(&self) -> HttpStatus {
         let raw = self.status_raw();
         HttpStatus {

@@ -1,7 +1,8 @@
 extern crate libc;
-extern crate url;
+pub extern crate url;
 extern crate hyper;
 extern crate websocket;
+pub extern crate serde_json;
 
 use std::net::{IpAddr};
 
@@ -23,9 +24,9 @@ fn main() {
     }
 
     let client = hyper::Client::new();
-    let conn = discord::Connection::from_token("TEST".to_owned(),
-                                               discord::TokenType::Bot,
-                                               &client);
+    let conn = discord::Connection::from_token(
+        discord::AuthorizationToken::new_bot("TEST".to_owned()),
+        &client);
 
     println!("{:?}", conn);
 }
